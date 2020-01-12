@@ -16,26 +16,19 @@ protocol Shape  : class {
     static  func makeShape(value:Any) throws -> Shape
     static var startingSymbol : String { get  }
     static var endingSymbol : String { get  }
-    func getRepresentation() -> String
     func getValue ()->Any
     func canContainChild(_ innerShape:Shape)-> Bool
 }
 
-extension Shape  {
-    public func getRepresentation() ->  String  {
-        return Self.startingSymbol + "\(getValue())" + Self.endingSymbol
-    }
-}
-
-class ShapeBase : Shape {
+class ShapeBase : Shape,CustomStringConvertible {
     func canContainChild(_ innerShape: Shape) -> Bool {
         return true
     }
     class func makeShape(value: Any) throws -> Shape {
         return ShapeBase(val: value )
     }
-    class var startingSymbol: String { "{"}
-    class var endingSymbol: String { "}"}
+    class var startingSymbol: String { "|"}
+    class var endingSymbol: String { "|"}
     
     func getValue() -> Any {
         return value
@@ -45,7 +38,10 @@ class ShapeBase : Shape {
     init(val : Any) {
         value = val
     }
-    
+    public var description: String {
+      return Self.startingSymbol + "\(getValue())" + Self.endingSymbol
+
+      }
 }
 class CircleShape:  ShapeBase  {
     override func canContainChild(_ innerShape: Shape) -> Bool {

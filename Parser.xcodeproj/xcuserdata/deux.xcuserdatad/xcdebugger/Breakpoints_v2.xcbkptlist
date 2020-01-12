@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "31FEBEAF-E487-4F17-A5C6-FCCBF0AAC807"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ParserTests/ParserTests.swift"
@@ -18,70 +18,6 @@
             endingLineNumber = "201"
             landmarkName = "test_parser_missmatching_complement_token()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "11FC6F1B-F1B7-49DB-92D4-FCE21E281F58"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ParserTests/ParserTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "test_parser_extra_tokens()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5968D6FC-E549-4F15-82AD-AC79924C3B5A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Parser/Parser.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "parse(s:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5968D6FC-E549-4F15-82AD-AC79924C3B5A - 3538a1bb04bb9c2d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Parser.DefaultParser.parse(s: Swift.String) throws -&gt; Parser.TreeNode&lt;Parser.Shape&gt;"
-                  moduleName = "Parser"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/deux/Documents/Work/Parser/Parser/Parser.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
-                  offsetFromSymbolStart = "4637">
-               </Location>
-               <Location
-                  uuid = "5968D6FC-E549-4F15-82AD-AC79924C3B5A - d2f54fbc855e0498"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ParserTests.DefaultParser.parse(s: Swift.String) throws -&gt; ParserTests.TreeNode&lt;ParserTests.Shape&gt;"
-                  moduleName = "ParserTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/deux/Documents/Work/Parser/Parser/Parser.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
-                  offsetFromSymbolStart = "4637">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

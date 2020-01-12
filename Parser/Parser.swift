@@ -42,7 +42,7 @@ class DefaultParser : ParserProtocol {
             
             if let shape = shape {
                 let generatedShape =  try shape.makeShape(value: tokens[i+1].token)
-                print("current shape :\(generatedShape.getRepresentation())")
+                print("current shape :\(generatedShape)")
                 
                 shapesStack.push(TreeNode<Shape>(value:generatedShape))
                 tokensStack.push(tokens[i].token)
