@@ -12,6 +12,7 @@ enum ShapeErrors : Error {
     case valueDidnotMatch
     case shapeNotRegistered
     case notComplementToken
+    case invalidValueFormat
 }
 
 
@@ -28,7 +29,7 @@ class DefaultParser : ParserProtocol {
     func makeTreeOf(s: String) throws -> TreeNode<Shape> {
         var shapesStack = Stack<TreeNode<Shape>>()
         var tokensStack = Stack<String>()
-        let container = TreeNode<Shape>(value: CircleShape(val:"root"))
+        let container = TreeNode<Shape>(value: ShapeBase(val:"root"))
         shapesStack.push(container)
         let tokens = lexer.tokenize(s: s)
         var i = 0

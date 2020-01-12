@@ -178,5 +178,54 @@ class ParserTests: XCTestCase {
         waitForExpectations(timeout: 0.5, handler: nil)
         
       }
+    
+    func test_parser_circle_lowerCase () {
+           let lexer = DefaultLexer()
+             let string = "[12](bALL(INK[1[35]](CHARLIE)))"
+           let parser = DefaultParser(lexer)
+           parser.regiterShape(shape: CircleShape.self)
+           parser.regiterShape(shape: SquareShape.self)
+        let exp = self.expectation(description: "invalidValueFormat")
+
+           do {
+             let container =  try parser.makeTreeOf(s: string)
+               print(container)
+           }
+           catch ShapeErrors.invalidValueFormat {
+            exp.fulfill()
+           }
+           catch {
+               print(error)
+               XCTFail()
+           }
+        waitForExpectations(timeout: 0.5, handler: nil)
+
+           
+       }
+    
+    func test_parser_square_letters_not_numbers () {
+           let lexer = DefaultLexer()
+             let string = "[square](BALL(INK[1[35]](CHARLIE)))"
+           let parser = DefaultParser(lexer)
+           parser.regiterShape(shape: CircleShape.self)
+           parser.regiterShape(shape: SquareShape.self)
+        let exp = self.expectation(description: "invalidValueFormat")
+
+           do {
+             let container =  try parser.makeTreeOf(s: string)
+               print(container)
+           }
+           catch ShapeErrors.invalidValueFormat {
+            exp.fulfill()
+           }
+           catch {
+               print(error)
+               XCTFail()
+           }
+        waitForExpectations(timeout: 0.5, handler: nil)
+
+           
+       }
+
 
 }

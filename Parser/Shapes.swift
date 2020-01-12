@@ -12,8 +12,8 @@ protocol ParserProtocol {
     //returns root
     func makeTreeOf(s:String) throws -> TreeNode<Shape>
 }
-protocol Shape  {
-    static func makeShape(value:Any) throws -> Shape
+protocol Shape  : class {
+    static  func makeShape(value:Any) throws -> Shape
     static var startingSymbol : String { get  }
     static var endingSymbol : String { get  }
     func getRepresentation() -> String
@@ -24,83 +24,77 @@ extension Shape  {
     public func getRepresentation() ->  String  {
         return Self.startingSymbol + "\(getValue())" + Self.endingSymbol
     }
-   
 }
 
-class ShapeBase {
+class ShapeBase : Shape {
+    class func makeShape(value: Any) throws -> Shape {
+        return ShapeBase(val: value )
+    }
+    class var startingSymbol: String { "{"}
+    class var endingSymbol: String { "}"}
+    
+    func getValue() -> Any {
+        return treeNode.value
+    }
+    
+    private var treeNode : TreeNode<Any>
+    init(val : Any) {
+        treeNode = TreeNode<Any>(value: val)
+    }
     
 }
-class CircleShape:  Shape {
-    func getValue() -> Any {
-        return value
-    }
+class CircleShape:  ShapeBase  {
     
-    var value :  String
-    init(val : String) {
-        value = val
-    }
-    static func makeShape(value: Any) throws -> Shape {
-        // I will implement shape rules here
+    override class func makeShape(value: Any) throws -> Shape {
         if let val = value as? String {
+            for c in val {
+                if (c.isLowercase || !c.isLetter ){
+                    throw ShapeErrors.invalidValueFormat
+                }
+            }
             return  CircleShape(val: val)
         }
         throw ShapeErrors.valueDidnotMatch
     }
     
+    override class var startingSymbol: String { "("}
     
-    static var startingSymbol: String { "("}
-    
-    static var endingSymbol: String { ")"}
+    override class var endingSymbol: String { ")"}
     
 }
 
-class SquareShape:  Shape {
-    var value :  String
-    init(val : String) {
-        value = val
-    }
-    static func makeShape(value: Any) throws -> Shape {
-        // I will implement shape rules here
-
+class SquareShape:  ShapeBase {
+    
+    override class func makeShape(value: Any) throws -> Shape {
+        
         if let val = value as? String {
-            
+            for c in val {
+                if (!c.isNumber ){
+                    throw ShapeErrors.invalidValueFormat
+                }
+            }
             return  SquareShape(val: val)
         }
         throw ShapeErrors.valueDidnotMatch
     }
     
     
-    static var startingSymbol: String { "["}
+    override class var startingSymbol: String { "["}
     
-    static var endingSymbol: String { "]"}
-    func getValue() -> Any {
-        return value
-    }
+    override class var endingSymbol: String { "]"}
+    
     
 }
 
-class TrinangleShape:  Shape {
-    var value :  String
-    init(val : String) {
-        value = val
+class TrinangleShape:  ShapeBase {
+   
+    override class func makeShape(value: Any) throws -> Shape {
+         if let val = value as? String {
+                   return  TrinangleShape(val: val)
+               }
+               throw ShapeErrors.valueDidnotMatch
     }
-    static func makeShape(value: Any) throws -> Shape {
-        // I will implement shape rules here
-
-        if let val = value as? String {
-            
-            return  TrinangleShape(val: val)
-        }
-        throw ShapeErrors.valueDidnotMatch
-    }
-    
-    
-    static var startingSymbol: String { "{"}
-    
-    static var endingSymbol: String { "}"}
-    func getValue() -> Any {
-        return value
-    }
-    
+    override class var endingSymbol: String {">"}
+    override class var startingSymbol: String {"<"}
 }
 

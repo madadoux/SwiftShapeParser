@@ -3,4 +3,102 @@
    uuid = "4F8C7BBE-227E-41FE-9C15-996E03E7D9A2"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C9692845-699C-45C9-9E52-25A0EDE76CEF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parser/Shapes.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "makeShape(value:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C9692845-699C-45C9-9E52-25A0EDE76CEF - 7323862a6e298777"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Parser.CircleShape.makeShape(value: Any) throws -&gt; Parser.Shape"
+                  moduleName = "Parser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/deux/Documents/Work/Parser/Parser/Shapes.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "748">
+               </Location>
+               <Location
+                  uuid = "C9692845-699C-45C9-9E52-25A0EDE76CEF - c20c13cc0c3e3e5f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ParserTests.CircleShape.makeShape(value: Any) throws -&gt; ParserTests.Shape"
+                  moduleName = "ParserTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/deux/Documents/Work/Parser/Parser/Shapes.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "748">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A173ED3D-1814-43E0-9B09-803DCDDE67F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Parser/Shapes.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "makeShape(value:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A173ED3D-1814-43E0-9B09-803DCDDE67F0 - 8f2ed008ae0ed456"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Parser.SquareShape.makeShape(value: Any) throws -&gt; Parser.Shape"
+                  moduleName = "Parser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/deux/Documents/Work/Parser/Parser/Shapes.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "638">
+               </Location>
+               <Location
+                  uuid = "A173ED3D-1814-43E0-9B09-803DCDDE67F0 - 58cd0aac5b78d23e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ParserTests.SquareShape.makeShape(value: Any) throws -&gt; ParserTests.Shape"
+                  moduleName = "ParserTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/deux/Documents/Work/Parser/Parser/Shapes.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "638">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
