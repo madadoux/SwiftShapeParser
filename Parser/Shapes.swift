@@ -10,7 +10,7 @@ import Foundation
 
 protocol ParserProtocol {
     //returns root
-    func makeTreeOf(s:String) throws -> TreeNode<Shape>
+    func parse(s:String) throws -> TreeNode<Shape>
 }
 protocol Shape  : class {
     static  func makeShape(value:Any) throws -> Shape
@@ -18,6 +18,7 @@ protocol Shape  : class {
     static var endingSymbol : String { get  }
     func getRepresentation() -> String
     func getValue ()->Any
+    func canContainChild(_ innerShape:Shape)-> Bool
 }
 
 extension Shape  {
@@ -27,6 +28,9 @@ extension Shape  {
 }
 
 class ShapeBase : Shape {
+    func canContainChild(_ innerShape: Shape) -> Bool {
+        return true
+    }
     class func makeShape(value: Any) throws -> Shape {
         return ShapeBase(val: value )
     }
@@ -34,22 +38,25 @@ class ShapeBase : Shape {
     class var endingSymbol: String { "}"}
     
     func getValue() -> Any {
-        return treeNode.value
+        return value
     }
     
-    private var treeNode : TreeNode<Any>
+    var value :  Any
     init(val : Any) {
-        treeNode = TreeNode<Any>(value: val)
+        value = val
     }
     
 }
 class CircleShape:  ShapeBase  {
+    override func canContainChild(_ innerShape: Shape) -> Bool {
+        return innerShape is CircleShape || innerShape is SquareShape
+    }
     
     override class func makeShape(value: Any) throws -> Shape {
         if let val = value as? String {
             for c in val {
                 if (c.isLowercase || !c.isLetter ){
-                    throw ShapeErrors.invalidValueFormat
+                    throw ShapeErrors.invalidLabelFormat
                 }
             }
             return  CircleShape(val: val)
@@ -65,12 +72,15 @@ class CircleShape:  ShapeBase  {
 
 class SquareShape:  ShapeBase {
     
+    override func canContainChild(_ innerShape: Shape) -> Bool {
+           return innerShape is SquareShape
+    }
     override class func makeShape(value: Any) throws -> Shape {
         
         if let val = value as? String {
             for c in val {
                 if (!c.isNumber ){
-                    throw ShapeErrors.invalidValueFormat
+                    throw ShapeErrors.invalidLabelFormat
                 }
             }
             return  SquareShape(val: val)

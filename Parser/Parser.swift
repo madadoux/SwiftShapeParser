@@ -11,8 +11,10 @@ import Foundation
 enum ShapeErrors : Error {
     case valueDidnotMatch
     case shapeNotRegistered
-    case notComplementToken
-    case invalidValueFormat
+    case maliformedInput
+    case invalidLabelFormat
+    case invalidInnerShape
+    case invalidInput
 }
 
 
@@ -25,37 +27,53 @@ class DefaultParser : ParserProtocol {
     init(_ lexer : LexerProtocol) {
         self.lexer = lexer
     }
-    
-    func makeTreeOf(s: String) throws -> TreeNode<Shape> {
+    func parse(s: String) throws -> TreeNode<Shape> {
         var shapesStack = Stack<TreeNode<Shape>>()
         var tokensStack = Stack<String>()
         let container = TreeNode<Shape>(value: ShapeBase(val:"root"))
         shapesStack.push(container)
         let tokens = lexer.tokenize(s: s)
         var i = 0
+        if (tokens.count < 2 ) {
+            throw ShapeErrors.invalidInput
+        }
         while  i < tokens.count {
-            let shape = identifyShape(token: tokens[i])
-            if let  shape = shape {
-                let generatedShape =  try shape.makeShape(value: tokens[i+1])
+            let shape = identifyShape(token: tokens[i].token)
+            
+            if let shape = shape {
+                let generatedShape =  try shape.makeShape(value: tokens[i+1].token)
                 print("current shape :\(generatedShape.getRepresentation())")
                 
                 shapesStack.push(TreeNode<Shape>(value:generatedShape))
-                tokensStack.push(tokens[i])
+                tokensStack.push(tokens[i].token)
                 i = i + 1
             }
             else {
-                //check top
-                if let topToken = tokensStack.top  {
-                    if isTokenIsComplementOfToken(a:topToken  , b: tokens[i]) {
-                        let popedShape = shapesStack.pop()!
-                        _ = tokensStack.pop()
-                        if let topShape = shapesStack.top {
+                
+                
+                
+                if let topToken = tokensStack.top  , isTokenIsComplementOfToken(a:topToken  , b: tokens[i].token) {
+                    let popedShape = shapesStack.pop()!
+                    _ = tokensStack.pop()
+                    if let topShape = shapesStack.top {
+                        if (topShape.value.canContainChild(popedShape.value)) {
                             topShape.addChild(popedShape)
                         }
+                        else {
+                            throw ShapeErrors.invalidInnerShape
+                        }
+                    }
+                }
+                else {
+                    if (tokens[i].type == .symbol && !isTokenRegonized(a:  tokens[i].token))
+                    {
+                        throw ShapeErrors.invalidInput
                     }
                     else {
-                        throw ShapeErrors.notComplementToken
+                        throw ShapeErrors.maliformedInput
                     }
+                    
+                    
                 }
             }
             
@@ -70,7 +88,10 @@ class DefaultParser : ParserProtocol {
         let complementToken =  tokenComplement[a]
         return  complementToken != nil && complementToken == b;
     }
-    
+    func isTokenRegonized( a:String)->Bool {
+        let t =  tokenComplement[a]
+        return  t != nil || tokenComplement.values.contains(a)
+    }
     func regiterShape(shape:Shape.Type) {
         registeredShapes[shape.startingSymbol] = shape
         tokenComplement [shape.startingSymbol] = shape.endingSymbol

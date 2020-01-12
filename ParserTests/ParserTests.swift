@@ -11,14 +11,6 @@ import XCTest
 
 class ParserTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
    func test_lexer () {
         let lexer = DefaultLexer()
     let string = "[12](BALL(INK[1[35]](CHARLIE)))"
@@ -26,7 +18,7 @@ class ParserTests: XCTestCase {
     let expectedTokens = ["[","12","]","(","BALL","(","INK","[","1","[","35","]","]","(","CHARLIE",")",")",")"]
     XCTAssert(tokens.count == expectedTokens.count,"invalid length")
     for i in 0..<expectedTokens.count {
-        XCTAssert(tokens[i] == expectedTokens[i] , "invalid at pos \(i)")
+        XCTAssert(tokens[i].token == expectedTokens[i] , "invalid at pos \(i)")
     }
     
     }
@@ -149,7 +141,7 @@ class ParserTests: XCTestCase {
         parser.regiterShape(shape: SquareShape.self)
 
         do {
-          let container =  try parser.makeTreeOf(s: string)
+          let container =  try parser.parse(s: string)
             print(container)
         }
         catch {
@@ -158,17 +150,54 @@ class ParserTests: XCTestCase {
         }
         
     }
+    func test_parser_invalid_input () {
+         let lexer = DefaultLexer()
+           let string = "%#@"
+         let parser = DefaultParser(lexer)
+         parser.regiterShape(shape: CircleShape.self)
+         parser.regiterShape(shape: SquareShape.self)
+
+         do {
+           let container =  try parser.parse(s: string)
+             print(container)
+            XCTFail()
+
+         }
+         catch {
+             print(error)
+         }
+         
+     }
+    
+    func test_parser_invalid_input_2 () {
+           let lexer = DefaultLexer()
+             let string = "[12](BALL(SOUL)*&#"
+           let parser = DefaultParser(lexer)
+           parser.regiterShape(shape: CircleShape.self)
+           parser.regiterShape(shape: SquareShape.self)
+
+           do {
+             let container =  try parser.parse(s: string)
+             print(container)
+             XCTFail()
+
+           }
+           catch {
+               print(error)
+           }
+           
+       }
     func test_parser_missmatching_complement_token () {
           let lexer = DefaultLexer()
-          let string = "[12}(BALL(INK[1[35]](CHARLIE)))"
+          let string = "[12)(BALL(INK[1[35]](CHARLIE)))"
           let parser = DefaultParser(lexer)
           parser.regiterShape(shape: CircleShape.self)
           parser.regiterShape(shape: SquareShape.self)
         let exp = self.expectation(description: "mismatching complement")
           do {
-            _ =  try parser.makeTreeOf(s: string)
+            _ =  try parser.parse(s: string)
           }
-          catch ShapeErrors.notComplementToken {
+          catch ShapeErrors.maliformedInput {
             exp.fulfill()
           }
           catch {
@@ -178,7 +207,79 @@ class ParserTests: XCTestCase {
         waitForExpectations(timeout: 0.5, handler: nil)
         
       }
+    func test_parser_missmatching_complement_token_2 () {
+             let lexer = DefaultLexer()
+             let string = "[12](BALL(INK[1[35]](CHARLIE])"
+             let parser = DefaultParser(lexer)
+             parser.regiterShape(shape: CircleShape.self)
+             parser.regiterShape(shape: SquareShape.self)
+           let exp = self.expectation(description: "mismatching complement")
+             do {
+               _ =  try parser.parse(s: string)
+             }
+             catch ShapeErrors.maliformedInput {
+               exp.fulfill()
+             }
+             catch {
+               XCTFail()
+           }
+           
+           waitForExpectations(timeout: 0.5, handler: nil)
+           
+         }
     
+    func test_parser_one_shape() {
+        let lexer = DefaultLexer()
+        let string = "[12]"
+        let parser = DefaultParser(lexer)
+        parser.regiterShape(shape: CircleShape.self)
+        parser.regiterShape(shape: SquareShape.self)
+        do {
+          let container =  try parser.parse(s: string)
+            print(container)
+        }
+        catch {
+          XCTFail()
+      }
+      
+      
+    }
+    func test_parser_one_shape2() {
+           let lexer = DefaultLexer()
+           let string = "(BALL)"
+           let parser = DefaultParser(lexer)
+           parser.regiterShape(shape: CircleShape.self)
+           parser.regiterShape(shape: SquareShape.self)
+           do {
+             let container =  try parser.parse(s: string)
+               print(container)
+           }
+           catch {
+             XCTFail()
+         }
+         
+         
+       }
+    func test_parser_extra_tokens () {
+                let lexer = DefaultLexer()
+                let string = "[12]]]"
+                let parser = DefaultParser(lexer)
+                parser.regiterShape(shape: CircleShape.self)
+                parser.regiterShape(shape: SquareShape.self)
+              let exp = self.expectation(description: "mismatching complement")
+                do {
+                  _ =  try parser.parse(s: string)
+                }
+                catch ShapeErrors.maliformedInput {
+                  exp.fulfill()
+                }
+                catch {
+                  XCTFail()
+              }
+              
+              waitForExpectations(timeout: 0.5, handler: nil)
+              
+            }
     func test_parser_circle_lowerCase () {
            let lexer = DefaultLexer()
              let string = "[12](bALL(INK[1[35]](CHARLIE)))"
@@ -188,10 +289,10 @@ class ParserTests: XCTestCase {
         let exp = self.expectation(description: "invalidValueFormat")
 
            do {
-             let container =  try parser.makeTreeOf(s: string)
+             let container =  try parser.parse(s: string)
                print(container)
            }
-           catch ShapeErrors.invalidValueFormat {
+           catch ShapeErrors.invalidLabelFormat {
             exp.fulfill()
            }
            catch {
@@ -212,10 +313,10 @@ class ParserTests: XCTestCase {
         let exp = self.expectation(description: "invalidValueFormat")
 
            do {
-             let container =  try parser.makeTreeOf(s: string)
+             let container =  try parser.parse(s: string)
                print(container)
            }
-           catch ShapeErrors.invalidValueFormat {
+           catch ShapeErrors.invalidLabelFormat {
             exp.fulfill()
            }
            catch {
@@ -226,6 +327,70 @@ class ParserTests: XCTestCase {
 
            
        }
+    
+    
+    func test_parser_square_should_not_contain_circle() {
+              let lexer = DefaultLexer()
+                let string = "[12](BALL(INK[1(HALL)](CHARLIE)))"
+              let parser = DefaultParser(lexer)
+              parser.regiterShape(shape: CircleShape.self)
+              parser.regiterShape(shape: SquareShape.self)
+           let exp = self.expectation(description: "contain_circle")
 
+              do {
+                let container =  try parser.parse(s: string)
+                  print(container)
+              }
+              catch ShapeErrors.invalidInnerShape {
+               exp.fulfill()
+              }
+              catch {
+                  print(error)
+                  XCTFail()
+              }
+           waitForExpectations(timeout: 0.5, handler: nil)
+
+              
+          }
+
+    func test_parser_adding_new_shape_1() {
+                let lexer = DefaultLexer()
+                  let string = "[12](BALL(INK[1[35]](CHARLIE)))<happy<flappy>>"
+                let parser = DefaultParser(lexer)
+                parser.regiterShape(shape: CircleShape.self)
+                parser.regiterShape(shape: SquareShape.self)
+                parser.regiterShape(shape: TrinangleShape.self)
+                do {
+                  let container =  try parser.parse(s: string)
+                    print(container)
+                }
+              
+                catch {
+                    print(error)
+                    XCTFail()
+                }
+                
+            }
+
+    func test_parser_adding_new_shape_2() {
+                let lexer = DefaultLexer()
+                  let string = "[12](BALL(INK[1[35]](CHARLIE)))<happy<flappy(CALL)>>"
+                let parser = DefaultParser(lexer)
+                parser.regiterShape(shape: CircleShape.self)
+                parser.regiterShape(shape: SquareShape.self)
+                parser.regiterShape(shape: TrinangleShape.self)
+                do {
+                  let container =  try parser.parse(s: string)
+                    print(container)
+                }
+              
+                catch {
+                    print(error)
+                    XCTFail()
+                }
+                
+            }
+    
+    
 
 }
