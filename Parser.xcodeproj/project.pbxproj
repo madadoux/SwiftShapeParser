@@ -16,6 +16,16 @@
 		582C8A7923CB2235000E9A6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 582C8A7723CB2235000E9A6A /* LaunchScreen.storyboard */; };
 		582C8A8423CB2235000E9A6A /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8A8323CB2235000E9A6A /* ParserTests.swift */; };
 		582C8A8F23CB2235000E9A6A /* ParserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8A8E23CB2235000E9A6A /* ParserUITests.swift */; };
+		582C8A9D23CB22AD000E9A6A /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8A9C23CB22AD000E9A6A /* Stack.swift */; };
+		582C8A9F23CB22EE000E9A6A /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8A9E23CB22EE000E9A6A /* Lexer.swift */; };
+		582C8AA123CB22FA000E9A6A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8AA023CB22FA000E9A6A /* Parser.swift */; };
+		582C8AA323CB2306000E9A6A /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8AA223CB2306000E9A6A /* Shapes.swift */; };
+		582C8AA423CB251A000E9A6A /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8A9E23CB22EE000E9A6A /* Lexer.swift */; };
+		582C8AA623CB2BD2000E9A6A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8AA523CB2BD2000E9A6A /* Tree.swift */; };
+		582C8AA723CB2C5D000E9A6A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8AA523CB2BD2000E9A6A /* Tree.swift */; };
+		582C8AA823CB42B4000E9A6A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8AA023CB22FA000E9A6A /* Parser.swift */; };
+		582C8AA923CB4394000E9A6A /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8A9C23CB22AD000E9A6A /* Stack.swift */; };
+		582C8AAA23CB5C92000E9A6A /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582C8AA223CB2306000E9A6A /* Shapes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +61,11 @@
 		582C8A8A23CB2235000E9A6A /* ParserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		582C8A8E23CB2235000E9A6A /* ParserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserUITests.swift; sourceTree = "<group>"; };
 		582C8A9023CB2235000E9A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		582C8A9C23CB22AD000E9A6A /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		582C8A9E23CB22EE000E9A6A /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
+		582C8AA023CB22FA000E9A6A /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		582C8AA223CB2306000E9A6A /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		582C8AA523CB2BD2000E9A6A /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +124,11 @@
 				582C8A7723CB2235000E9A6A /* LaunchScreen.storyboard */,
 				582C8A7A23CB2235000E9A6A /* Info.plist */,
 				582C8A7223CB2233000E9A6A /* Parser.xcdatamodeld */,
+				582C8A9C23CB22AD000E9A6A /* Stack.swift */,
+				582C8A9E23CB22EE000E9A6A /* Lexer.swift */,
+				582C8AA023CB22FA000E9A6A /* Parser.swift */,
+				582C8AA223CB2306000E9A6A /* Shapes.swift */,
+				582C8AA523CB2BD2000E9A6A /* Tree.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -263,9 +283,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				582C8A7423CB2233000E9A6A /* Parser.xcdatamodeld in Sources */,
+				582C8A9D23CB22AD000E9A6A /* Stack.swift in Sources */,
 				582C8A6E23CB2233000E9A6A /* ViewController.swift in Sources */,
+				582C8AA623CB2BD2000E9A6A /* Tree.swift in Sources */,
+				582C8AA323CB2306000E9A6A /* Shapes.swift in Sources */,
 				582C8A6A23CB2233000E9A6A /* AppDelegate.swift in Sources */,
+				582C8A9F23CB22EE000E9A6A /* Lexer.swift in Sources */,
 				582C8A6C23CB2233000E9A6A /* SceneDelegate.swift in Sources */,
+				582C8AA123CB22FA000E9A6A /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +298,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				582C8AA823CB42B4000E9A6A /* Parser.swift in Sources */,
+				582C8AA923CB4394000E9A6A /* Stack.swift in Sources */,
+				582C8AA723CB2C5D000E9A6A /* Tree.swift in Sources */,
+				582C8AA423CB251A000E9A6A /* Lexer.swift in Sources */,
 				582C8A8423CB2235000E9A6A /* ParserTests.swift in Sources */,
+				582C8AAA23CB5C92000E9A6A /* Shapes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
